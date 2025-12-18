@@ -1,0 +1,87 @@
+---
+import Header from '@components/frame/Header.astro';
+import Footer from '@components/frame/Footer.astro';
+import appleTouchIconImage from '@assets/apple-touch-icon.png';
+import faviconImage from '@assets/favicon.png';
+import ogImage from '@assets/ogp.png';
+import thumbnailImage from '@assets/thumbnail.png';
+import config from '@config';
+import '@styles/main.css';
+import '@fontsource-variable/noto-sans-jp';
+import { useI18n } from '@libs/i18n';
+
+interface BaseProps {
+  isHome?: false | undefined;
+  is404?: false | undefined;
+  title?: string | undefined;
+  description?: string | undefined;
+  ogType?: 'website' | 'article' | undefined;
+  ogImage?: string | undefined;
+}
+
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
+interface GeneralProps extends BaseProps {}
+interface HomeProps extends Omit<BaseProps, 'isHome'> {
+  isHome: true;
+}
+interface NotFoundProps extends Omit<BaseProps, 'is404'> {
+  is404: true;
+}
+type Props = GeneralProps | HomeProps | NotFoundProps;
+const is404 = Astro.props.is404 === true;
+const { title = undefined, description, ogType = 'website' } = Astro.props;
+const resolvedOgImage = new URL(ogImage.src, Astro.url);
+
+const messages = {
+  ja: {
+    keywords: config.keywordsJa,
+    locale: 'ja_JP',
+  },
+  en: {
+    keywords: config.keywordsEn,
+    locale: 'en_US',
+  },
+};
+
+const { lang, t } = useI18n(Astro, messages);
+---
+
+<!doctype html>
+<html
+  class:list={[
+    'bg-white wrap-anywhere text-slate-800 [scrollbar-gutter:stable] [text-autospace:normal]',
+    // https://schepp.dev/posts/smooth-scrolling-and-page-search/
+    'motion-safe:focus-within:scroll-smooth',
+  ]}
+  lang={lang}
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title set:html={title} />
+    {description && <meta name="description" content={description} />}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta property="og:title" content={title} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:image" content={resolvedOgImage.href} />
+    {!is404 && <meta property="og:url" content={Astro.url} />}
+    <meta name="keywords" content={t('keywords')} />
+    {description && <meta property="og:description" content={description} />}
+    <meta property="og:site_name" content={title} />
+    <meta property="og:locale" content={t('locale')} />
+    <meta name="thumbnail" content={thumbnailImage.src} />
+    <link rel="apple-touch-icon" href={appleTouchIconImage.src} />
+    {!is404 && <link rel="canonical" href={Astro.url} />}
+    <link rel="icon" href={faviconImage.src} type="image/x-icon" />
+    <meta name="generator" content={Astro.generator} />
+    <script src="../scripts/main.ts"></script>
+  </head>
+  <body x-data="scroll">
+    <Header />
+    <slot />
+    <Footer />
+    <slot name="sdk" />
+    <div id="js-overlay-container"></div>
+  </body>
+</html>

@@ -1,0 +1,40 @@
+---
+import { formatDate } from '@libs/data-time-fotmatter';
+import { useI18n } from '@libs/i18n';
+import type { Post } from '@data/news';
+import { messages } from './PostList.i18.ts';
+
+interface Props {
+  posts: Post[];
+  basePath?: string;
+}
+
+const { posts, basePath = '' }: Props = Astro.props;
+
+const { lang, t, localePath } = useI18n(Astro, messages);
+---
+
+<ul class="grid grid-cols-[max-content_fit-content(10rem)_minmax(0,1fr)] divide-y">
+  {
+    posts.map((post) => {
+      const date = formatDate(post.publishedAt, lang);
+      return (
+        <li class="col-span-full grid grid-cols-subgrid items-center gap-x-5 py-5">
+          <p class="text-sm text-gray-500">{date}</p>
+          {post.category && (
+            <a
+              aria-label={`${post.category.name}${t('ariaLabel')}`}
+              class="mx-auto w-fit rounded-md bg-gray-200 px-2 py-1 text-sm hover:opacity-60"
+              href={`${localePath(basePath)}/category/${post.category.id}/`}
+            >
+              {post.category.name}
+            </a>
+          )}
+          <p class="line-clamp-2 text-sm">
+            {post.title && <a href={`${localePath(basePath)}/${post.id}/`}>{post.title}</a>}
+          </p>
+        </li>
+      );
+    })
+  }
+</ul>

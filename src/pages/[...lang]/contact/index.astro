@@ -1,0 +1,32 @@
+---
+import Layout from '@layouts/Layout.astro';
+import ContactForm from '@components/ContactForm/ContactForm.astro';
+import { useI18n, getLanguagePaths } from '@libs/i18n';
+
+export function getStaticPaths() {
+  return [...getLanguagePaths()];
+}
+
+const messages = {
+  ja: {
+    title: 'お問い合わせ',
+    description: 'お問い合わせ',
+  },
+  en: {
+    title: 'Contact',
+    description: 'Contact',
+  },
+};
+
+const { t } = useI18n(Astro, messages);
+---
+
+<Layout title={t('title')} description={t('description')}>
+  <main class="pt-20">
+    <h2 class="text-center text-2xl font-bold" set:html={t('title')} />
+    <div class="mx-auto my-10 max-w-screen-md">
+      <ContactForm isConfirm />
+    </div>
+  </main>
+  <script is:inline defer src="https://sdk.form.run/js/v2/formrun.js" slot="sdk"></script>
+</Layout>

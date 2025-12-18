@@ -1,0 +1,62 @@
+---
+import Layout from '@layouts/Layout.astro';
+import PostList from '@components/PostList/PostList.astro';
+import Pagination from '@components/Pagination/Pagination.astro';
+import { useI18n, getLangParam } from '@libs/i18n';
+import { getAllCategories, getNewsByCategory } from '@data/news';
+import type { GetStaticPathsOptions } from 'astro';
+
+export const getStaticPaths = ({ paginate }: GetStaticPathsOptions) => {
+  return getAllCategories().flatMap(({ lang, category }) => {
+    const posts = getNewsByCategory(lang, category.id);
+    if (posts.length === 0) return [];
+
+    const langParam = getLangParam(lang);
+
+    const pages = paginate(posts, {
+      pageSize: 6,
+      params: {
+        lang: langParam,
+        category: category.id,
+      },
+      props: {
+        categoryName: category.name,
+      },
+    });
+
+    return pages;
+  });
+};
+
+const categoryId = Astro.params.category;
+const { page, categoryName } = Astro.props;
+
+const messages = {
+  ja: {
+    title: `${categoryName}の記事一覧`,
+    description: `${categoryName}の記事一覧`,
+  },
+  en: {
+    title: `${categoryName} article list`,
+    description: `${categoryName} article list`,
+  },
+};
+
+const { t, localePath } = useI18n(Astro, messages);
+---
+
+<Layout title={t('title')} description={t('description')}>
+  <main>
+    <div class="mx-auto my-10 max-w-screen-sm">
+      <h1 class="text-center text-2xl font-bold" set:html={t('title')} />
+      <PostList posts={page.data} basePath="/news" />
+      {
+        page.size < page.total && (
+          <div class="mx-auto mt-3 w-fit">
+            <Pagination baseUrl={localePath(`/news/category/${categoryId}`)} page={page} />
+          </div>
+        )
+      }
+    </div>
+  </main>
+</Layout>

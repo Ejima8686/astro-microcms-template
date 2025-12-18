@@ -1,0 +1,42 @@
+---
+import config from '@config';
+import ButtonLang from '@components/ButtonLang/ButtonLang.astro';
+import { useI18n } from '@libs/i18n';
+
+const messages = {
+  ja: {
+    nav: {
+      home: 'ホーム',
+      about: '私たちについて',
+      contact: 'お問い合わせ',
+    },
+  },
+  en: {
+    nav: {
+      home: 'Home',
+      about: 'About',
+      contact: 'Contact',
+    },
+  },
+};
+
+const { t, localePath } = useI18n(Astro, messages);
+---
+
+<header class="fixed inset-x-0 top-0 z-100 w-full">
+  <div class="bg-black px-10 py-3">
+    <div class="flex items-center justify-between">
+      <div>
+        <a href={localePath('/')}><p class="text-2xl text-white">{config.siteTitle}</p></a>
+      </div>
+      <div class="flex items-center gap-10 text-white">
+        <ul class="flex items-center gap-4">
+          <li><a href={localePath('/')}>{t('nav.home')}</a></li>
+          <li><a href={localePath('/about')}>{t('nav.about')}</a></li>
+          <li><a href={localePath('/contact/')}>{t('nav.contact')}</a></li>
+        </ul>
+        <ButtonLang />
+      </div>
+    </div>
+  </div>
+</header>

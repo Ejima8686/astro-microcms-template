@@ -1,0 +1,49 @@
+---
+import Layout from '@layouts/Layout.astro';
+import { formatDate } from '@libs/data-time-fotmatter';
+import { useI18n, getLangParam } from '@libs/i18n';
+import { getAllNews } from '@data/news';
+
+export function getStaticPaths() {
+  return getAllNews().map(({ lang, news }) => ({
+    params: {
+      lang: getLangParam(lang),
+      id: news.id,
+    },
+    props: { news },
+  }));
+}
+
+const { news } = Astro.props;
+
+const messages = {
+  ja: {
+    title: `最新情報 - ${news.title}`,
+    description: `最新情報 - ${news.title}`,
+    backToList: '一覧へ戻る',
+  },
+  en: {
+    title: `Latest News - ${news.title}`,
+    description: `Latest News - ${news.title}`,
+    backToList: 'Back to list',
+  },
+};
+
+const { lang, t, localePath } = useI18n(Astro, messages);
+---
+
+<Layout title={t('title')}>
+  <main>
+    <div class="mx-auto my-10 max-w-screen-sm">
+      <p class="text-sm text-gray-500">{formatDate(news.publishedAt, lang)}</p>
+      <h1 class="mt-2 text-2xl font-bold" set:html={news.title} />
+      <div class="prose mt-10" set:html={news.content} />
+
+      <div class="mt-10 text-center">
+        <a href={localePath('/news/')}>
+          {t('backToList')}
+        </a>
+      </div>
+    </div>
+  </main>
+</Layout>

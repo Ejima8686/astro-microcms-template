@@ -1,0 +1,8 @@
+.effect-hover {
+  @variant md {
+    &:hover {
+      opacity: 0.6;
+      transition: opacity 0.3s;
+    }
+  }
+}

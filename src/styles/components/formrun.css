@@ -1,0 +1,17 @@
+.formrun {
+  .required {
+    color: red;
+    font-size: 12px;
+  }
+
+  [data-formrun-show-if-error] {
+    color: red;
+    font-size: 12px;
+
+    &::before {
+      content: '※';
+      color: red;
+      font-size: 12px;
+    }
+  }
+}
