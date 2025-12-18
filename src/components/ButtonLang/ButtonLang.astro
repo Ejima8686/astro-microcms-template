@@ -1,0 +1,42 @@
+---
+import { useI18n, getLangPrefix, LANGUAGES, type Lang } from '@libs/i18n';
+import { messages } from './ButtonLang.i18n.ts';
+
+const { lang, langPrefix } = useI18n(Astro, messages);
+
+const langSwitchPath = (targetLang: Lang) => {
+  const pathname = Astro.url.pathname;
+
+  // 言語に依存しないパスを取得する
+  // 例) '/en/news' -> '/news', '/' -> '/'
+  let currentPath = pathname.startsWith(langPrefix) ? pathname.slice(langPrefix.length) : pathname;
+  if (currentPath === '') {
+    currentPath = '/';
+  }
+
+  const targetPrefix = getLangPrefix(targetLang);
+  return `${targetPrefix}${currentPath}`;
+};
+---
+
+<div data-button-lang class="flex items-center gap-2.5 md:gap-4.5">
+  {
+    LANGUAGES.map((targetLang, index) => {
+      return (
+        <>
+          <a
+            aria-label={messages[targetLang].description}
+            aria-hidden={lang === targetLang}
+            href={langSwitchPath(targetLang)}
+            class:list={[lang === targetLang ? 'pointer-events-none' : 'pointer-events-auto']}
+          >
+            <span class:list={[lang === targetLang ? '' : 'text-[#808080]']}>
+              {messages[targetLang].label}
+            </span>
+          </a>
+          {index === 0 && <div class="h-3.5 w-px rotate-30 bg-white" />}
+        </>
+      );
+    })
+  }
+</div>

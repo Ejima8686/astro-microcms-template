@@ -1,0 +1,23 @@
+{
+  "name": "@astro-microcms-template/microcms",
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "setup:dummy": "tsx setup-dummy-data.ts",
+    "delete:dummy": "tsx delete-dummy-data.ts",
+    "create:dummy:categories": "tsx create-dummy-categories.ts",
+    "create:dummy:categories:ja": "tsx create-dummy-categories.ts",
+    "create:dummy:categories:en": "tsx create-dummy-categories.ts",
+    "create:dummy:news": "tsx create-dummy-news.ts",
+    "create:dummy:news:ja": "tsx create-dummy-news.ts",
+    "create:dummy:news:en": "tsx create-dummy-news.ts"
+  },
+  "dependencies": {
+    "@faker-js/faker": "^10.1.0",
+    "microcms-js-sdk": "^3.2.0"
+  },
+  "devDependencies": {
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
+  }
+}

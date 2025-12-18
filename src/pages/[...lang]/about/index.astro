@@ -1,0 +1,58 @@
+---
+import Layout from '@layouts/Layout.astro';
+import { useI18n, getLanguagePaths } from '@libs/i18n';
+
+export function getStaticPaths() {
+  return [...getLanguagePaths()];
+}
+
+const messages = {
+  ja: {
+    title: 'このサイトについて',
+    description: 'Astro と microCMS を使ったニュースサイトのデモです。',
+    lead: 'このサイトは、ヘッドレス CMS である microCMS と静的サイトジェネレーター Astro を組み合わせたニュースサイトのサンプルプロジェクトです。',
+    section1Title: '技術スタック',
+    section1Body:
+      'フロントエンドは Astro をベースに、TypeScript とユーティリティファーストな CSS を用いて構築されています。コンテンツ管理には microCMS を採用し、ニュース記事やカテゴリ情報を API 経由で取得・表示しています。',
+    section2Title: 'このサイトの目的',
+    section2Body:
+      '実務に近い構成で「多言語対応」「ニュース一覧・詳細」「カテゴリ別アーカイブ」などを実装し、学習や検証に活用できるようにすることを目的としています。コードの構成やコンポーネント分割なども含めて、自由に参考・改変してご利用ください。',
+  },
+  en: {
+    title: 'About this site',
+    description: 'A demo news site built with Astro and microCMS.',
+    lead: 'This website is a sample project of a news site built with the headless CMS microCMS and the static site generator Astro.',
+    section1Title: 'Tech stack',
+    section1Body:
+      'The frontend is built on top of Astro using TypeScript and utility-first CSS. Content such as news articles and categories is managed in microCMS and fetched via API.',
+    section2Title: 'Purpose of this project',
+    section2Body:
+      'The goal of this project is to provide a practical example that implements features like multilingual support, news list/detail pages, and category archives. Feel free to use the codebase as a reference or modify it for your own experiments.',
+  },
+};
+
+const { t } = useI18n(Astro, messages);
+---
+
+<Layout title={t('title')} description={t('description')}>
+  <main class="mx-auto max-w-screen-sm px-4 py-10 pt-20">
+    <h1 class="text-center text-3xl font-bold" set:html={t('title')} />
+    <p class="mt-4 text-center text-sm text-gray-500" set:html={t('description')} />
+
+    <section class="mt-10 space-y-6">
+      <p class="leading-relaxed" set:html={t('lead')} />
+
+      <div class="grid gap-8 md:grid-cols-2">
+        <div class="space-y-2">
+          <h2 class="text-xl font-bold" set:html={t('section1Title')} />
+          <p class="text-sm leading-relaxed text-gray-700" set:html={t('section1Body')} />
+        </div>
+
+        <div class="space-y-2">
+          <h2 class="text-xl font-bold" set:html={t('section2Title')} />
+          <p class="text-sm leading-relaxed text-gray-700" set:html={t('section2Body')} />
+        </div>
+      </div>
+    </section>
+  </main>
+</Layout>

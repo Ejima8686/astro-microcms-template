@@ -1,0 +1,21 @@
+{
+  "extends": "astro/tsconfigs/strict",
+  "compilerOptions": {
+    "types": ["vitest/importMeta"],
+    "baseUrl": ".",
+    "paths": {
+      "@layouts/*": ["src/layouts/*"],
+      "@components/*": ["src/components/*"],
+      "@pages/*": ["src/pages/*"],
+      "@content/*": ["src/content/*"],
+      "@assets/*": ["src/assets/*"],
+      "@i18n/*": ["src/libs/i18n/*"],
+      "@config": ["src/config.ts"],
+      "@data/*": ["src/data/*"],
+      "@libs/*": ["src/libs/*"],
+      "@scripts/*": ["src/scripts/*"],
+      "@styles/*": ["src/styles/*"]
+    }
+  },
+  "exclude": ["dist"]
+}

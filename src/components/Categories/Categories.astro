@@ -1,0 +1,32 @@
+---
+import { useI18n } from '@libs/i18n';
+import { messages } from './Categories.i18.ts';
+
+interface Props {
+  categories: { name: string; id: string }[];
+  basePath?: string;
+}
+
+const { categories, basePath = '' }: Props = Astro.props;
+const { t, localePath } = useI18n(Astro, messages);
+---
+
+{
+  categories.length > 0 && (
+    <>
+      <ul class="flex flex-wrap gap-x-5 gap-y-2">
+        {categories.map((category) => {
+          return (
+            <a
+              aria-label={`${category.name}${t('ariaLabel')}`}
+              href={`${localePath(basePath)}/category/${category.id}/`}
+              class="rounded-sm bg-gray px-1 py-0.5 text-sm hover:opacity-60"
+            >
+              <span class="text-xs text-white">{category.name}</span>
+            </a>
+          );
+        })}
+      </ul>
+    </>
+  )
+}

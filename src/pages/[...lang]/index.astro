@@ -1,0 +1,65 @@
+---
+import Layout from '@layouts/Layout.astro';
+import Fv from '@components/Fv.astro';
+import PostList from '@components/PostList/PostList.astro';
+import Categories from '@components/Categories/Categories.astro';
+import config from '@config';
+import { useI18n, getLanguagePaths } from '@libs/i18n';
+import { getNews, getCategories } from '@data/news';
+
+export function getStaticPaths() {
+  return [...getLanguagePaths()];
+}
+
+const messages = {
+  ja: {
+    title: config.siteTitle,
+    description: config.siteTitle,
+    explanation: `${config.siteTitle}の開発環境です。<br />CMSはmicroCMS、フレームワークはAstroです。`,
+    categoriesTitle: 'カテゴリー',
+    latestNewsTitle: '最新情報',
+    moreText: 'もっと見る',
+  },
+  en: {
+    title: config.siteTitle + ' English site',
+    description: config.siteTitle + ' English site',
+    explanation: `${config.siteTitle} development environment.<br />CMS is microCMS, framework is Astro.`,
+    categoriesTitle: 'Categories',
+    latestNewsTitle: 'Latest News',
+    moreText: 'More',
+  },
+};
+
+const { lang, t, localePath } = useI18n(Astro, messages);
+
+const news = getNews(lang, true).slice(0, 5);
+const categories = getCategories(lang);
+---
+
+<Layout title={t('title')} description={t('description')}>
+  <main>
+    <Fv />
+    <div class="mx-auto my-10 max-w-screen-sm">
+      <p class="text-center text-sm font-bold" set:html={t('explanation')} />
+      {
+        categories.length > 0 && (
+          <div class="mt-10 flex flex-col items-center gap-3">
+            <h2 class="text-xl font-bold" set:html={t('categoriesTitle')} />
+            <Categories categories={categories} basePath="/news" />
+          </div>
+        )
+      }
+      {
+        news.length > 0 && (
+          <div class="mt-10 flex flex-col items-center gap-3">
+            <h2 class="text-xl font-bold" set:html={t('latestNewsTitle')} />
+            <PostList posts={news} basePath="/news" />
+            <a class="block text-center font-bold" href={localePath('/news/')}>
+              {t('moreText')}
+            </a>
+          </div>
+        )
+      }
+    </div>
+  </main>
+</Layout>

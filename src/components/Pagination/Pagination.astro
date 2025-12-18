@@ -1,0 +1,45 @@
+---
+import { useI18n } from '@libs/i18n';
+import type { Page } from 'astro';
+import { messages } from './Pagination.i18n';
+
+interface Props {
+  page: Page;
+  baseUrl?: string;
+}
+
+const { page, baseUrl = '' }: Props = Astro.props;
+const { t } = useI18n(Astro, messages);
+const totalPages = page.lastPage;
+const pageNumbers = Array.from({ length: totalPages }, (_, i) => {
+  return i + 1;
+});
+
+// ページ番号からページURLを生成
+const getPageUrl = (pageNumber: number) => {
+  return pageNumber === 1 ? page.url.first : `${baseUrl}/${pageNumber}`;
+};
+---
+
+<div class="flex justify-center gap-x-6">
+  {page.url.first && <a href={page.url.first}>{t('first')}</a>}
+  {page.url.prev && <a href={page.url.prev}>{t('prev')}</a>}
+  {
+    pageNumbers.map((pageNumber) => {
+      return (
+        <a
+          class:list={[
+            'pageNumber',
+            { 'pointer-events-none font-bold': pageNumber === page.currentPage },
+          ]}
+          href={getPageUrl(pageNumber)}
+          aria-label={t('pageLabel', { pageNumber: String(pageNumber) })}
+        >
+          {pageNumber}
+        </a>
+      );
+    })
+  }
+  {page.url.next && <a href={page.url.next}>{t('next')}</a>}
+  {page.url.last && <a href={page.url.last}>{t('last')}</a>}
+</div>
