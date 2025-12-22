@@ -41,7 +41,7 @@
     "@types/alpinejs__persist": "^3.13.4",
     "@types/gsap": "^3.0.0",
     "dotenv": "^17.2.3",
-    "eslint": "^9.39.1",
+    "eslint": "^9.39.2",
     "eslint-plugin-astro": "^1.5.0",
     "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-jsx-a11y": "^6.10.2",
