@@ -13,7 +13,7 @@ MICROCMS_SERVICE_DOMAIN=サービスドメイン
 MICROCMS_API_KEY=APIキー
 ```
 
-2. 値の確認方法は microCMS 公式ドキュメントや、以下の記事などを参照してください。
+1. 値の確認方法は microCMS 公式ドキュメントや、以下の記事などを参照してください。
    - [AstroとmicroCMSでつくるブログサイト](https://blog.microcms.io/astro-microcms-introduction/)
 
 ---
@@ -27,10 +27,8 @@ microCMS の管理画面で、コンテンツモデル（API）を作成しま�
   - **エンドポイント**: `news`
 - 記事（英語）用 API
   - **エンドポイント**: `news-en`
-- カテゴリ（日本語）用 API
+- カテゴリ用 API
   - **エンドポイント**: `categories`
-- カテゴリ（英語）用 API
-  - **エンドポイント**: `categories-en`
 
 ---
 
@@ -52,13 +50,8 @@ const endpoints = [
   },
   {
     endpoint: 'categories',
-    subDir: 'categories',
-    outputFileName: 'ja',
-  },
-  {
-    endpoint: 'categories-en',
-    subDir: 'categories',
-    outputFileName: 'en',
+    subDir: 'news',
+    outputFileName: 'categories',
   },
   // 必要に応じてここに API を追加する
 ];
@@ -94,8 +87,15 @@ microCMSのダミーコンテンツの一括生成ができます。
 
 ```bash
 cd plugins/microcms
-npm i
+npm install
 npm run setup:dummy [生成するカテゴリ数] [生成する記事数]
+```
+
+**例:**
+
+```bash
+# カテゴリ10件、記事30件を日本語・英語それぞれ作成
+npm run setup:dummy 10 30
 ```
 
 詳しい仕様・使用方法は以下を参照してください。

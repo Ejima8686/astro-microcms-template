@@ -5,8 +5,10 @@
   "scripts": {
     "dev": "astro dev",
     "dev:host": "astro dev --host",
+    "dev:staging": "astro dev --mode=staging",
     "build": "pnpm run fetch-data && astro build",
     "build:local": "astro build",
+    "build:staging": "astro build --mode=staging",
     "build:dummy": "pnpm run generate-dummy-json && astro build",
     "preview": "astro preview",
     "fetch-data": "tsx src/data/scripts/fetch-data.ts",

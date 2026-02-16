@@ -53,14 +53,14 @@ npm install
 カテゴリと記事を一度に作成します。
 
 ```bash
-pnpm setup:dummy [カテゴリ数] [記事数]
+npm run setup:dummy [カテゴリ数] [記事数]
 ```
 
 **例:**
 
 ```bash
 # カテゴリ10件、記事30件を日本語・英語それぞれ作成
-pnpm setup:dummy 10 30
+npm run setup:dummy 10 30
 ```
 
 ### 2. ダミーデータの削除
@@ -68,47 +68,47 @@ pnpm setup:dummy 10 30
 全てのダミーデータ（カテゴリ・記事）を削除します。
 
 ```bash
-pnpm delete:dummy
+npm run delete:dummy
 ```
 
 ### 3. カテゴリのみ作成
 
 ```bash
 # 日本語・英語両方
-pnpm create:dummy:categories [件数]
+npm run create:dummy:categories [件数]
 
 # 日本語のみ
-pnpm create:dummy:categories:ja [件数]
+npm run create:dummy:categories:ja [件数]
 
 # 英語のみ
-pnpm create:dummy:categories:en [件数]
+npm run create:dummy:categories:en [件数]
 ```
 
 **例:**
 
 ```bash
 # 日本語・英語それぞれ5件のカテゴリを作成
-pnpm create:dummy:categories 5
+npm run create:dummy:categories 5
 ```
 
 ### 4. 記事のみ作成
 
 ```bash
 # 日本語・英語両方
-pnpm create:dummy:news [件数]
+npm run create:dummy:news [件数]
 
 # 日本語のみ
-pnpm create:dummy:news:ja [件数]
+npm run create:dummy:news:ja [件数]
 
 # 英語のみ
-pnpm create:dummy:news:en [件数]
+npm run create:dummy:news:en [件数]
 ```
 
 **例:**
 
 ```bash
 # 日本語・英語それぞれ20件の記事を作成
-pnpm create:dummy:news 20
+npm run create:dummy:news 20
 ```
 
 ## 生成されるデータ
@@ -128,7 +128,7 @@ pnpm create:dummy:news 20
 
 ## ファイル構成
 
-```
+```text
 plugins/microcms/
 ├── README.md                      # このファイル
 ├── package.json                   # パッケージ設定
@@ -146,7 +146,7 @@ plugins/microcms/
 
 2. **既存データ**: 各コマンドは既存のダミーデータを自動的に削除してから新しいデータを作成します。
 
-3. **API制限**: microCMSのAPIレート制限に注意してください。大量のデータを作成する場合は、適切な間隔を空けて実行してください。<br>
+3. **API制限**: microCMSのAPIレート制限に注意してください。大量のデータを作成する場合は、適切な間隔を空けて実行してください。
    参照: [コンテンツAPIに関する制限事項](https://document.microcms.io/manual/limitations#h9e37a059c1)
 
 ## トラブルシューティング
