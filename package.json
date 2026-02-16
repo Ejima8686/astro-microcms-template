@@ -31,7 +31,7 @@
     "astro": "^5.16.6",
     "astro-icon": "^1.1.5",
     "gsap": "^3.14.2",
-    "lenis": "^1.3.15",
+    "lenis": "^1.3.17",
     "microcms-js-sdk": "^3.2.0",
     "prettier-plugin-astro-organize-imports": "^0.4.11",
     "tailwindcss": "^4.1.17"
