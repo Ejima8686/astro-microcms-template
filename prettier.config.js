@@ -7,7 +7,8 @@ export default {
     'prettier-plugin-astro',
     'prettier-plugin-css-order',
     'prettier-plugin-organize-imports',
-    'prettier-plugin-tailwindcss', // MUST come last
+    'prettier-plugin-tailwindcss',
+    'prettier-plugin-astro-organize-imports',
   ],
   printWidth: 100,
   singleQuote: true,
