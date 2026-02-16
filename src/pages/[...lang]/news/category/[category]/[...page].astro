@@ -1,9 +1,9 @@
 ---
-import Layout from '@layouts/Layout.astro';
-import PostList from '@components/PostList/PostList.astro';
 import Pagination from '@components/Pagination/Pagination.astro';
-import { useI18n, getLangParam } from '@libs/i18n';
+import PostList from '@components/PostList/PostList.astro';
 import { getAllCategories, getNewsByCategory } from '@data/news';
+import Layout from '@layouts/Layout.astro';
+import { getLangParam, useI18n } from '@libs/i18n';
 import type { GetStaticPathsOptions } from 'astro';
 
 export const getStaticPaths = ({ paginate }: GetStaticPathsOptions) => {

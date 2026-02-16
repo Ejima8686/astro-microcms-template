@@ -30,7 +30,7 @@ const endpoints = [
     endpoint: 'categories',
     subDir: 'news',
     outputFileName: 'categories',
-  }
+  },
 ];
 
 async function main() {

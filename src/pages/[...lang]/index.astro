@@ -1,11 +1,11 @@
 ---
-import Layout from '@layouts/Layout.astro';
+import Categories from '@components/Categories/Categories.astro';
 import Fv from '@components/Fv.astro';
 import PostList from '@components/PostList/PostList.astro';
-import Categories from '@components/Categories/Categories.astro';
 import config from '@config';
-import { useI18n, getLanguagePaths } from '@libs/i18n';
-import { getNews, getCategories } from '@data/news';
+import { getCategories, getNews } from '@data/news';
+import Layout from '@layouts/Layout.astro';
+import { getLanguagePaths, useI18n } from '@libs/i18n';
 
 export function getStaticPaths() {
   return [...getLanguagePaths()];

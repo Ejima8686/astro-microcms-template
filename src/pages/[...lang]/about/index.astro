@@ -1,6 +1,6 @@
 ---
 import Layout from '@layouts/Layout.astro';
-import { useI18n, getLanguagePaths } from '@libs/i18n';
+import { getLanguagePaths, useI18n } from '@libs/i18n';
 
 export function getStaticPaths() {
   return [...getLanguagePaths()];

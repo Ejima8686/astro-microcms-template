@@ -1,8 +1,8 @@
 ---
+import { getAllNews } from '@data/news';
 import Layout from '@layouts/Layout.astro';
 import { formatDate } from '@libs/data-time-fotmatter';
-import { useI18n, getLangParam } from '@libs/i18n';
-import { getAllNews } from '@data/news';
+import { getLangParam, useI18n } from '@libs/i18n';
 
 export function getStaticPaths() {
   return getAllNews().map(({ lang, news }) => ({
