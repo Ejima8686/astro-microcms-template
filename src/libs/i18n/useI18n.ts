@@ -42,11 +42,16 @@ const createT = <T extends Record<string, unknown>>(lang: Lang, localMessages: M
  */
 export const useI18n = <T extends Record<string, unknown>>(
   astro: AstroContext,
-  messages: Messages<T>,
+  messages?: Messages<T>,
 ) => {
   const lang = getLang(astro);
   const langPrefix = getLangPrefix(lang);
-  const t = createT(lang, messages);
+  let t: ReturnType<typeof createT<T>>;
+  if (messages) {
+    t = createT(lang, messages);
+  } else {
+    t = createT(lang, { ja: {}, en: {} });
+  }
 
   /**
    * 言語プレフィックス付きパスを生成

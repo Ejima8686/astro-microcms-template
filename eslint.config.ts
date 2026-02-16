@@ -23,6 +23,7 @@ export default [
   {
     rules: {
       'astro/jsx-a11y/iframe-has-title': 'off',
+      'astro/jsx-a11y/label-has-associated-control': 'off',
     },
   },
 ];
