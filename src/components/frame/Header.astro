@@ -8,18 +8,17 @@ const messages = {
     nav: {
       home: 'ホーム',
       about: '私たちについて',
-      contact: 'お問い合わせ',
     },
   },
   en: {
     nav: {
       home: 'Home',
       about: 'About',
-      contact: 'Contact',
-    },
+   },
   },
 };
 
+console.log(Astro.site);
 const { t, localePath } = useI18n(Astro, messages);
 ---
 
@@ -33,7 +32,6 @@ const { t, localePath } = useI18n(Astro, messages);
         <ul class="flex items-center gap-4">
           <li><a href={localePath('/')}>{t('nav.home')}</a></li>
           <li><a href={localePath('/about')}>{t('nav.about')}</a></li>
-          <li><a href={localePath('/contact/')}>{t('nav.contact')}</a></li>
         </ul>
         <ButtonLang />
       </div>
