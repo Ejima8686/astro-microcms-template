@@ -25,3 +25,4 @@ pnpm-debug.log*
 
 # json files
 src/data/json/
+src/data/dummy-json/

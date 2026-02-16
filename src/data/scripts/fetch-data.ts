@@ -28,14 +28,9 @@ const endpoints = [
   },
   {
     endpoint: 'categories',
-    subDir: 'categories',
-    outputFileName: 'ja',
-  },
-  {
-    endpoint: 'categories-en',
-    subDir: 'categories',
-    outputFileName: 'en',
-  },
+    subDir: 'news',
+    outputFileName: 'categories',
+  }
 ];
 
 async function main() {

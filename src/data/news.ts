@@ -1,35 +1,27 @@
+import { useDummyData } from '@libs/env';
 import type { Lang } from '@libs/i18n';
-import enCategoriesData from './json/categories/en.json' with { type: 'json' };
-import jaCategoriesData from './json/categories/ja.json' with { type: 'json' };
+import categoriesDataDummy from './dummy-json/news/categories.json' with { type: 'json' };
+import enNewsDataDummy from './dummy-json/news/en.json' with { type: 'json' };
+import jaNewsDataDummy from './dummy-json/news/ja.json' with { type: 'json' };
+import categoriesData from './json/news/categories.json' with { type: 'json' };
 import enNewsData from './json/news/en.json' with { type: 'json' };
 import jaNewsData from './json/news/ja.json' with { type: 'json' };
 
-export interface Post {
-  id: string;
-  publishedAt: string;
-  title: string;
-  content: string;
-  category?: {
-    id: string;
-    name: string;
-  } | null;
-}
-
-export interface Category {
-  id: string;
-  name: string;
-}
+export type Post = DetailPost;
+export type Category = DetailCategory;
 
 export const POSTS_PER_PAGE = 5;
 
+const isDummyMode = useDummyData();
+
 const news: Record<Lang, Post[]> = {
-  ja: jaNewsData as Post[],
-  en: enNewsData as Post[],
+  ja: (isDummyMode ? jaNewsDataDummy : jaNewsData) as Post[],
+  en: (isDummyMode ? enNewsDataDummy : enNewsData) as Post[],
 };
 
 const categories: Record<Lang, Category[]> = {
-  ja: jaCategoriesData as Category[],
-  en: enCategoriesData as Category[],
+  ja: (isDummyMode ? categoriesDataDummy : categoriesData) as Category[],
+  en: (isDummyMode ? categoriesDataDummy : categoriesData) as Category[],
 };
 
 /**
@@ -65,6 +57,27 @@ export const getAllNews = (): { lang: Lang; news: Post }[] =>
  */
 export const getCategories = (lang: Lang): { name: string; id: string }[] => {
   return categories[lang].map((category) => ({ name: category.name, id: category.id }));
+};
+
+/**
+ * 記事に使われているカテゴリ一覧を取得
+ */
+export const getCategoriesByNews = (lang: Lang): Category[] => {
+  const newsPosts = getNews(lang);
+  if (!newsPosts) return [];
+
+  const categoryMap = new Map<string, Category>();
+
+  newsPosts.forEach((post) => {
+    if (post.category) {
+      categoryMap.set(post.category.id, {
+        id: post.category.id,
+        name: post.category.name,
+      });
+    }
+  });
+
+  return Array.from(categoryMap.values());
 };
 
 /**
