@@ -29,6 +29,8 @@ const messages = {
   },
 };
 
+Astro.locals.setTypes('detail', 'news');
+
 const { lang, t, localePath } = useI18n(Astro, messages);
 ---
 

@@ -20,6 +20,7 @@ export const getStaticPaths = ({ paginate }: GetStaticPathsOptions) => {
         category: category.id,
       },
       props: {
+        categoryId: category.id,
         categoryName: category.name,
       },
     });
@@ -28,8 +29,7 @@ export const getStaticPaths = ({ paginate }: GetStaticPathsOptions) => {
   });
 };
 
-const categoryId = Astro.params.category;
-const { page, categoryName } = Astro.props;
+const { page, categoryId, categoryName } = Astro.props;
 
 const messages = {
   ja: {
@@ -42,6 +42,7 @@ const messages = {
   },
 };
 
+Astro.locals.setTypes('category', 'news');
 const { t, localePath } = useI18n(Astro, messages);
 ---
 

@@ -36,6 +36,11 @@ const messages = {
   },
 };
 
+if (page.currentPage === 1) {
+  Astro.locals.setTypes('archive', 'news');
+} else {
+  Astro.locals.setTypes('pagination', 'news');
+}
 const { t, localePath } = useI18n(Astro, messages);
 ---
 

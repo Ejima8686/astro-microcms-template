@@ -11,18 +11,30 @@ interface ImportMeta {
   readonly env: ImportMetaEnv;
 }
 
-interface DetailCategory {
+// 投稿タイプ
+declare type PostType = 'news';
+declare type PageType = 'detail' | 'category' | 'pagination' | 'archive';
+
+declare namespace App {
+  interface Locals {
+    pageType: PageType;
+    postType: PostType;
+    setTypes: (pageType: PageType, postType: PostType) => void;
+  }
+}
+
+declare interface NewsCategory {
   id: string;
   name: string;
 }
 
-interface DetailPost {
+declare interface NewsPost {
   id: string;
   publishedAt: string;
   title: string;
   description?: string;
   content: string;
-  category?: DetailCategory | null;
+  category?: NewsCategory | null;
   thumbnail?: {
     url: string;
     width: number;
