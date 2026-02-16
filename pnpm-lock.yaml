@@ -46,8 +46,8 @@ importers:
         specifier: ^3.15.2
         version: 3.15.2
       '@alpinejs/persist':
-        specifier: ^3.15.2
-        version: 3.15.2
+        specifier: ^3.15.3
+        version: 3.15.3
       '@astrojs/check':
         specifier: ^0.9.6
         version: 0.9.6(prettier-plugin-astro@0.14.1)(prettier@3.7.3)(typescript@5.9.3)
@@ -120,8 +120,8 @@ packages:
   '@alpinejs/intersect@3.15.2':
     resolution: {integrity: sha512-Q2X1/u82QXoet4n9+EBpat+CeVZ3TWGkyX+tNPf9SFQER1Y8ou8IZLCEoNIywWoAAbiUtKB8SAeoAZwXhNX4SQ==}
 
-  '@alpinejs/persist@3.15.2':
-    resolution: {integrity: sha512-g+2Nj42EWmSlJIWi6KANAzHjsxWIGQ/ye7kSvpEWMyRZQJLX/B6WUEofHXCYkvkWamA00o4JwnybVOrNJpDaeQ==}
+  '@alpinejs/persist@3.15.3':
+    resolution: {integrity: sha512-QOxhNhZxOEKIawGt7WqdFl4Z9V2k0EN006Iwqq+HCI21WSB8fwVxfaL1ICnOPhtg0OwW4zG6/nMvzA4gLFS92A==}
 
   '@antfu/install-pkg@1.1.0':
     resolution: {integrity: sha512-MGQsmw10ZyI+EJo45CdSER4zEb+p31LpDAFp2Z3gkSd1yqVZGi0Ebx++YTEMonJy4oChEMLsxZ64j8FH6sSqtQ==}
@@ -3763,7 +3763,7 @@ snapshots:
 
   '@alpinejs/intersect@3.15.2': {}
 
-  '@alpinejs/persist@3.15.2': {}
+  '@alpinejs/persist@3.15.3': {}
 
   '@antfu/install-pkg@1.1.0':
     dependencies:
